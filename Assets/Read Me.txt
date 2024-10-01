@@ -1,0 +1,4 @@
+Hello!
+
+You can use any assets you find in the project. 
+We have prepared a "Gameplay" scene for you, where you will find a basic set of assets and a ready-to-go UI.
