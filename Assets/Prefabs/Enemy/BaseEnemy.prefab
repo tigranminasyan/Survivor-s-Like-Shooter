@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 6232613785595655423}
   - component: {fileID: 7462217437478722825}
   - component: {fileID: 1079310755498452026}
+  - component: {fileID: 7263770287537531770}
   m_Layer: 6
   m_Name: BaseEnemy
   m_TagString: Untagged
@@ -227,3 +228,16 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.5, y: 1}
   m_Direction: 0
+--- !u!114 &7263770287537531770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8259022614184793817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b108d93b616c0d43b9dd2318b2deeb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 20

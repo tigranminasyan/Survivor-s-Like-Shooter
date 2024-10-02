@@ -21,16 +21,20 @@ public static class Layers
     public const int Default = 0;
     public const int TransparentFX = 1;
     public const int Ignore_Raycast = 2;
+    public const int Player = 3;
     public const int Water = 4;
     public const int UI = 5;
     public const int Enemy = 6;
+    public const int Bullet = 7;
 
     public const int DefaultMask = 1 << 0;
     public const int TransparentFXMask = 1 << 1;
     public const int Ignore_RaycastMask = 1 << 2;
+    public const int PlayerMask = 1 << 3;
     public const int WaterMask = 1 << 4;
     public const int UIMask = 1 << 5;
     public const int EnemyMask = 1 << 6;
+    public const int BulletMask = 1 << 7;
 }
 
 public static class Scenes

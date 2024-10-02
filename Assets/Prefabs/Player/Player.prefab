@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 4507213047161687609}
   - component: {fileID: 4164727106007282919}
   - component: {fileID: 6493461730130193939}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -438,8 +438,8 @@ MonoBehaviour:
   _gunSpriteRenderer: {fileID: 1826528184608411879}
   _leftHand: {fileID: 8617082735972935416}
   _rightHand: {fileID: 6352125516661063627}
-  _firePoint: {fileID: 0}
-  _bulletPrefab: {fileID: 0}
+  _firePoint: {fileID: 8421899959206210864}
+  _bulletController: {fileID: 1451634913858574173, guid: 5836fe9e1f244694bb17f52666b260fb, type: 3}
   _shootingInterval: 0.5
   _enemyDetector: {fileID: 4164727106007282919}
   _directionX: 0

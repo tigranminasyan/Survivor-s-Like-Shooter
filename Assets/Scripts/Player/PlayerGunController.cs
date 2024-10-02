@@ -10,13 +10,14 @@ public class PlayerGunController : MonoBehaviour
     [SerializeField] private Transform _leftHand;
     [SerializeField] private Transform _rightHand;
     [SerializeField] private Transform _firePoint;
-    [SerializeField] private GameObject _bulletPrefab;
+    [SerializeField] private BulletController _bulletController;
     [SerializeField] private float _shootingInterval = 0.5f;
     [SerializeField] private EnemyDetector _enemyDetector;
 
     [SerializeField, ReadonlyField] private float _directionX;
     [SerializeField, ReadonlyField] private int _initalSortingOrder;
 
+    private float _detltaTime;
     private void Awake()
     {
         _initalSortingOrder = _gunSpriteRenderer.sortingOrder;
@@ -41,6 +42,25 @@ public class PlayerGunController : MonoBehaviour
             }
             
             _gun.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            HandleShooting();
         }
+    }
+
+    private void HandleShooting()
+    {
+        if (_detltaTime >= _shootingInterval)
+        {
+            Shoot();
+            _detltaTime = 0;
+        }
+        else
+        {
+            _detltaTime += Time.deltaTime;
+        }
+    }
+
+    private void Shoot()
+    {
+        Instantiate(_bulletController, _firePoint.position, _gun.rotation);
     }
 }
