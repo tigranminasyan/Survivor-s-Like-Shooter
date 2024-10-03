@@ -242,9 +242,11 @@ GameObject:
   - component: {fileID: 6648336167200669554}
   - component: {fileID: 2087706235222633069}
   - component: {fileID: 1304582041697550607}
+  - component: {fileID: 8388015897885810718}
+  - component: {fileID: 6493461730130193939}
   - component: {fileID: 4507213047161687609}
   - component: {fileID: 4164727106007282919}
-  - component: {fileID: 6493461730130193939}
+  - component: {fileID: 4560013004572354231}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -386,6 +388,41 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0028276443, y: -0.011310756}
   m_Size: {x: 0.8925488, y: 1.2468392}
   m_Direction: 0
+--- !u!114 &8388015897885810718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7389218593641236623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e19e3a6802202849bffa4ccffc5afcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerHealthController: {fileID: 4560013004572354231}
+--- !u!114 &6493461730130193939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7389218593641236623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04e78e2d1d02a4848b0ebb545a61b842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gun: {fileID: 6261636145201765274}
+  _gunSpriteRenderer: {fileID: 1826528184608411879}
+  _leftHand: {fileID: 8617082735972935416}
+  _rightHand: {fileID: 6352125516661063627}
+  _firePoint: {fileID: 8421899959206210864}
+  _bulletController: {fileID: 1451634913858574173, guid: 5836fe9e1f244694bb17f52666b260fb, type: 3}
+  _shootingInterval: 0.5
+  _enemyDetector: {fileID: 4164727106007282919}
+  _directionX: 0
+  _initalSortingOrder: 0
 --- !u!114 &4507213047161687609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,7 +459,7 @@ MonoBehaviour:
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &6493461730130193939
+--- !u!114 &4560013004572354231
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -431,19 +468,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7389218593641236623}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04e78e2d1d02a4848b0ebb545a61b842, type: 3}
+  m_Script: {fileID: 11500000, guid: 168b05326f07b22419ebccb4b258f32f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gun: {fileID: 6261636145201765274}
-  _gunSpriteRenderer: {fileID: 1826528184608411879}
-  _leftHand: {fileID: 8617082735972935416}
-  _rightHand: {fileID: 6352125516661063627}
-  _firePoint: {fileID: 8421899959206210864}
-  _bulletController: {fileID: 1451634913858574173, guid: 5836fe9e1f244694bb17f52666b260fb, type: 3}
-  _shootingInterval: 0.5
-  _enemyDetector: {fileID: 4164727106007282919}
-  _directionX: 0
-  _initalSortingOrder: 0
+  _health: 5
 --- !u!1 &7693939964038952029
 GameObject:
   m_ObjectHideFlags: 0

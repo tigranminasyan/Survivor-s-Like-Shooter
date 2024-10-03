@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 7462217437478722825}
   - component: {fileID: 1079310755498452026}
   - component: {fileID: 7263770287537531770}
-  - component: {fileID: 1522938746406932449}
+  - component: {fileID: 3270966353788421643}
   m_Layer: 6
   m_Name: BaseEnemy
   m_TagString: Untagged
@@ -241,9 +241,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b108d93b616c0d43b9dd2318b2deeb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 20
-  _chasePlayer: {fileID: 1522938746406932449}
---- !u!114 &1522938746406932449
+  _enemyHealthController: {fileID: 3270966353788421643}
+  _animator: {fileID: 7462217437478722825}
+  _damage: 1
+  _moveSpeed: 2
+--- !u!114 &3270966353788421643
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -252,7 +254,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8259022614184793817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f72ec86c888a6ef44b9b556401cb23cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 99139f1b30d5bfd4b8e5e47a4dac6a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 2
+  _health: 4
+  _collider: {fileID: 1079310755498452026}
+  _rigidbody: {fileID: 0}

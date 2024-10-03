@@ -18,8 +18,8 @@ public class BulletController : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        EnemyController enemy;
-        collision.gameObject.TryGetComponent<EnemyController>(out enemy);
+        EnemyHealthController enemy;
+        collision.gameObject.TryGetComponent<EnemyHealthController>(out enemy);
         if (enemy != null)
         {
             enemy.GetDamage(_damage);

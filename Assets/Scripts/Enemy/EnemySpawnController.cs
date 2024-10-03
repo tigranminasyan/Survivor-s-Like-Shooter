@@ -9,11 +9,11 @@ public class EnemySpawnController : MonoBehaviour
     [SerializeField] private float _spawnPeriod = 1.0f;
     [SerializeField] private float _offset = 1.0f; 
     [SerializeField] private Transform _enemyContainer;
+    [SerializeField] private bool _spawning;
     private Camera _playerCamera;
-    private bool _spawning = true;
 
     [Inject]
-    private PlayerMovementController _player;
+    private PlayerController _player;
     private void Start()
     {
         _playerCamera = Camera.main;
@@ -36,7 +36,6 @@ public class EnemySpawnController : MonoBehaviour
                 Quaternion.identity,
                 _enemyContainer.transform);
             enemy.Construct(_player);
-
             yield return new WaitForSeconds(_spawnPeriod);
         }
     }

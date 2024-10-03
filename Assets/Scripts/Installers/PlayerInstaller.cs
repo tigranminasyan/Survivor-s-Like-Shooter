@@ -4,11 +4,11 @@ using UnityEngine;
 using Zenject;
 public class PlayerInstaller : MonoInstaller
 {
-    [SerializeField] private PlayerMovementController _playerMovementController;
+    [SerializeField] private PlayerController _playerController;
 
     public override void InstallBindings()
     {
-        Container.Bind<PlayerMovementController>().FromInstance(_playerMovementController).AsSingle();
+        Container.Bind<PlayerController>().FromInstance(_playerController).AsSingle();
     }
 }
 
