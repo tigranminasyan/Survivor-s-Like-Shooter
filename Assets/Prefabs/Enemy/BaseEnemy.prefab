@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 7462217437478722825}
   - component: {fileID: 1079310755498452026}
   - component: {fileID: 7263770287537531770}
+  - component: {fileID: 1522938746406932449}
   m_Layer: 6
   m_Name: BaseEnemy
   m_TagString: Untagged
@@ -241,3 +242,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 20
+  _chasePlayer: {fileID: 1522938746406932449}
+--- !u!114 &1522938746406932449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8259022614184793817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f72ec86c888a6ef44b9b556401cb23cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 2

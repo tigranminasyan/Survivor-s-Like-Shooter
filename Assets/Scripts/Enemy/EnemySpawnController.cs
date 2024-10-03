@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class EnemySpawnController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class EnemySpawnController : MonoBehaviour
     private Camera _playerCamera;
     private bool _spawning = true;
 
+    [Inject]
+    private PlayerMovementController _player;
     private void Start()
     {
         _playerCamera = Camera.main;
@@ -32,6 +35,8 @@ public class EnemySpawnController : MonoBehaviour
                 spawnPosition,
                 Quaternion.identity,
                 _enemyContainer.transform);
+            enemy.Construct(_player);
+
             yield return new WaitForSeconds(_spawnPeriod);
         }
     }
