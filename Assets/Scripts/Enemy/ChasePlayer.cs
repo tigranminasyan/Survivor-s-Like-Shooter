@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class ChasePlayer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private float _moveSpeed = 2.0f;
+    private Transform _target;
+
+    public void SetChaseTarget(Transform target)
     {
-        
+        _target = target;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (_target != null)
+        {
+            Vector3 direction = (_target.position - transform.position).normalized;
+            transform.position += direction * _moveSpeed * Time.deltaTime;
+        }
     }
 }
