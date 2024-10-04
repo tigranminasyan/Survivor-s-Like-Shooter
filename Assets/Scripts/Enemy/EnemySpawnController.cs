@@ -1,15 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 public class EnemySpawnController : MonoBehaviour
 {
+    public event Action<int> KilledEnemyCountChangedEvent;
+    
     [SerializeField] private List<EnemyController> _enemyTypes;
     [SerializeField] private float _spawnPeriod = 1.0f;
     [SerializeField] private float _offset = 1.0f; 
     [SerializeField] private Transform _enemyContainer;
     [SerializeField] private bool _spawning;
+
+    [SerializeField, ReadonlyField] private int _killedEnemyCount = 0;
     private Camera _playerCamera;
 
     [Inject]
@@ -36,6 +42,12 @@ public class EnemySpawnController : MonoBehaviour
                 Quaternion.identity,
                 _enemyContainer.transform);
             enemy.Construct(_player);
+            
+            if (enemy.TryGetDyingState(out DyingState dyingState))
+            {
+                dyingState.EnemyKilledEvent += OnEnemyKilled;
+            }
+            
             yield return new WaitForSeconds(_spawnPeriod);
         }
     }
@@ -70,5 +82,11 @@ public class EnemySpawnController : MonoBehaviour
     public void StopSpawning()
     {
         _spawning = false;
+    }
+    
+    private void OnEnemyKilled()
+    {
+        _killedEnemyCount++;
+        KilledEnemyCountChangedEvent?.Invoke(_killedEnemyCount);
     }
 }

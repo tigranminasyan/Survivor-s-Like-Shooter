@@ -110,4 +110,16 @@ public class EnemyController : MonoBehaviour
             _currentState.Enter();
         }
     }
+    
+    public bool TryGetDyingState(out DyingState dyingState)
+    {
+        if (_states.TryGetValue(EnemyState.Dying, out IEnemyState state) && state is DyingState dying)
+        {
+            dyingState = dying;
+            return true;
+        }
+
+        dyingState = null;
+        return false;
+    }
 }
