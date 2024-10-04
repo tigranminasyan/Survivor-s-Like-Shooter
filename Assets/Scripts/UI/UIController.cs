@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,8 +15,13 @@ public class UIController : MonoBehaviour
         _enemySpawnController.KilledEnemyCountChangedEvent += UpdateKilledEnemiesText;
     }
     
-    public void UpdateKilledEnemiesText(int killedEnemies)
+    private void UpdateKilledEnemiesText(int killedEnemies)
     {
         _killedEnemiesText.text = killedEnemies.ToString();
+    }
+
+    private void OnDestroy()
+    {
+        _enemySpawnController.KilledEnemyCountChangedEvent -= UpdateKilledEnemiesText;
     }
 }
