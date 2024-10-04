@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private EnemySpawnController _enemySpawnController;
     [SerializeField] private Text _killedEnemiesText;
     [SerializeField] private Slider _playerExperienceSlider;
+    [SerializeField] private Slider _playerHealthSlider;
 
     [Inject]
     private PlayerController _player;
@@ -21,6 +22,7 @@ public class UIController : MonoBehaviour
         
         _enemySpawnController.KilledEnemyCountChangedEvent += UpdateKilledEnemiesText;
         _player.PlayerExperienceChangeEvent += UpdatePlayerExperienceText;
+        _player.PlayerHealthChangeEvent += UpdatePlayerHealthText;
     }
     
     private void UpdateKilledEnemiesText(int killedEnemies)
@@ -33,9 +35,19 @@ public class UIController : MonoBehaviour
         _playerExperienceSlider.value = experience;
     }
 
+    private void UpdatePlayerHealthText(int health, bool isMax)
+    {
+        if (isMax)
+        {
+            _playerHealthSlider.maxValue = health;
+        }
+        _playerHealthSlider.value = health;
+    }
+
     private void OnDestroy()
     {
         _enemySpawnController.KilledEnemyCountChangedEvent -= UpdateKilledEnemiesText;
         _player.PlayerExperienceChangeEvent -= UpdatePlayerExperienceText;
+        _player.PlayerHealthChangeEvent -= UpdatePlayerHealthText;
     }
 }

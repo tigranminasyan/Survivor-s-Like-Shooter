@@ -401,6 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerHealthController: {fileID: 4560013004572354231}
+  _playerExperience: 0
 --- !u!114 &6493461730130193939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,7 +472,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 168b05326f07b22419ebccb4b258f32f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerController: {fileID: 8388015897885810718}
+  _maxHealth: 10
   _health: 5
+  _isDead: 0
 --- !u!1 &7693939964038952029
 GameObject:
   m_ObjectHideFlags: 0

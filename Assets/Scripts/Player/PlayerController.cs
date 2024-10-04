@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public event Action<int> PlayerExperienceChangeEvent;
+    public event Action<int, bool> PlayerHealthChangeEvent;
 
     [SerializeField] private PlayerHealthController _playerHealthController;
     [SerializeField, ReadonlyField] private int _playerExperience;
@@ -19,5 +20,10 @@ public class PlayerController : MonoBehaviour
     {
         _playerExperience += experience;
         PlayerExperienceChangeEvent?.Invoke(_playerExperience);
+    }
+    
+    public void OnPlayerHealthChange(int health, bool isMax)
+    {
+        PlayerHealthChangeEvent?.Invoke(health, isMax);
     }
 }
