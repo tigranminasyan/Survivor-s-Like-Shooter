@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class PlayerGunController : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class PlayerGunController : MonoBehaviour
     [SerializeField, ReadonlyField] private float _directionX;
     [SerializeField, ReadonlyField] private int _initalSortingOrder;
 
+    [Inject]
+    private GameManager _gameManager;
+    
     private float _detltaTime;
     private void Awake()
     {
@@ -25,24 +29,27 @@ public class PlayerGunController : MonoBehaviour
 
     private void Update()
     {
-        List<Transform> nearestReachableEnemy = _enemyDetector.GetNearestReachableEnemy();
-        if (nearestReachableEnemy.Count > 0)
+        if (_gameManager.IsGameStarted)
         {
-            Transform target = nearestReachableEnemy[0];
-            Vector3 direction = (target.position - _gun.position).normalized;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            _directionX = direction.x;
-            
-            if (Mathf.Abs(_directionX) > 0.2f)
+            List<Transform> nearestReachableEnemy = _enemyDetector.GetNearestReachableEnemy();
+            if (nearestReachableEnemy.Count > 0)
             {
-                bool isLeft = _directionX < 0;
-                _gunSpriteRenderer.sortingOrder = isLeft ? _initalSortingOrder + 1 : _initalSortingOrder;
-                _gunSpriteRenderer.flipY = isLeft;
-                _gun.position = isLeft ? _rightHand.position : _leftHand.position;
-            }
+                Transform target = nearestReachableEnemy[0];
+                Vector3 direction = (target.position - _gun.position).normalized;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                _directionX = direction.x;
             
-            _gun.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-            HandleShooting();
+                if (Mathf.Abs(_directionX) > 0.2f)
+                {
+                    bool isLeft = _directionX < 0;
+                    _gunSpriteRenderer.sortingOrder = isLeft ? _initalSortingOrder + 1 : _initalSortingOrder;
+                    _gunSpriteRenderer.flipY = isLeft;
+                    _gun.position = isLeft ? _rightHand.position : _leftHand.position;
+                }
+            
+                _gun.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+                HandleShooting();
+            }
         }
     }
 

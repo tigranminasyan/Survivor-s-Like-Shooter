@@ -33,8 +33,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3584965919435579138}
-  - {fileID: 3397326131611163486}
   - {fileID: 2021774718908608276}
+  - {fileID: 3397326131611163486}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -121,6 +121,8 @@ MonoBehaviour:
   _killedEnemiesText: {fileID: 7642397521237997228}
   _playerExperienceSlider: {fileID: 7360667892487991593}
   _playerHealthSlider: {fileID: 2337719209944527135}
+  _winPopup: {fileID: 6402285602156376069}
+  _losePopup: {fileID: 7552084327620000267}
 --- !u!1001 &2612443480676055655
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -227,6 +229,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4057614502165910899, guid: ec02be26d9176624185c85127799c523, type: 3}
   m_PrefabInstance: {fileID: 2612443480676055655}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6402285602156376069 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8977995489427049058, guid: ec02be26d9176624185c85127799c523, type: 3}
+  m_PrefabInstance: {fileID: 2612443480676055655}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3968575984545852396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -331,6 +338,11 @@ PrefabInstance:
 --- !u!224 &3397326131611163486 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1744736701438603442, guid: 67e3b09019d225b4480859fbc658c20f, type: 3}
+  m_PrefabInstance: {fileID: 3968575984545852396}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7552084327620000267 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6907768088244376039, guid: 67e3b09019d225b4480859fbc658c20f, type: 3}
   m_PrefabInstance: {fileID: 3968575984545852396}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7994638125982023184

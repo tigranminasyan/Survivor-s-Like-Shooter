@@ -40,6 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6567638458981080902}
+  - component: {fileID: 3473670676814495107}
   - component: {fileID: 1156575551803001633}
   m_Layer: 0
   m_Name: EnemyManager
@@ -64,6 +65,19 @@ Transform:
   - {fileID: 4704905999676955227}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3473670676814495107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8123301720054054288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5221a70e3e0c02240936a5170bc05ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemiesParent: {fileID: 4704905999676955227}
 --- !u!114 &1156575551803001633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,3 +99,4 @@ MonoBehaviour:
   _offset: 1
   _enemyContainer: {fileID: 4704905999676955227}
   _spawning: 1
+  _killedEnemyCount: 0

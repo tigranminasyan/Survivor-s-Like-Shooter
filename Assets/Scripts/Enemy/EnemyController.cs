@@ -124,4 +124,9 @@ public class EnemyController : MonoBehaviour
         dyingState = null;
         return false;
     }
+
+    public void KillEnemy()
+    {
+        SwitchState(EnemyState.Dying);
+    }
 }

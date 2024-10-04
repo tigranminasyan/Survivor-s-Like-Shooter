@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+
 public class PlayerInstaller : MonoInstaller
 {
     [SerializeField] private PlayerController _playerController;

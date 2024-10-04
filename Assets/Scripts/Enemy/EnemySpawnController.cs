@@ -20,6 +20,9 @@ public class EnemySpawnController : MonoBehaviour
 
     [Inject]
     private PlayerController _player;
+    [Inject]
+    private GameManager _gameManager;
+    
     private void Start()
     {
         _playerCamera = Camera.main;
@@ -33,7 +36,7 @@ public class EnemySpawnController : MonoBehaviour
     
     private IEnumerator SpawnEnemy()
     {
-        while (_spawning)
+        while (_spawning && _gameManager.IsGameStarted)
         {
             Vector3 spawnPosition = GetRandomPositionOutOfCameraView();
             EnemyController randomEnemy = _enemyTypes[Random.Range(0, _enemyTypes.Count)];

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class PlayerMovementController : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     
+    [Inject]
+    private GameManager _gameManager;
+    
     private void Start()
     {
         _currentMovementSpeed = _movementSpeed;
@@ -23,9 +27,12 @@ public class PlayerMovementController : MonoBehaviour
     
     void Update()
     {
-        _inputHorizontal = SimpleInput.GetAxis(Horizontal);
-        _inputVertical = SimpleInput.GetAxis(Vertical);
-        CheckIfPlayerControlling();
+        if (_gameManager.IsGameStarted)
+        {
+            _inputHorizontal = SimpleInput.GetAxis(Horizontal);
+            _inputVertical = SimpleInput.GetAxis(Vertical);
+            CheckIfPlayerControlling();
+        }
     }
     
     private void CheckIfPlayerControlling()
@@ -37,7 +44,7 @@ public class PlayerMovementController : MonoBehaviour
     
     private void FixedUpdate()
     {
-        if (_isPlayerControlling)
+        if (_isPlayerControlling && _gameManager.IsGameStarted)
         {
             MoveAndRotateByJoystick();
         }

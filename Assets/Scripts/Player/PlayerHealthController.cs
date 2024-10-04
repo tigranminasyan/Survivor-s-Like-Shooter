@@ -10,10 +10,11 @@ public class PlayerHealthController : MonoBehaviour
     [SerializeField, ReadonlyField] private int _health = 1;
     [SerializeField, ReadonlyField] private bool _isDead = false;
 
+    public int GetMaxHealth => _maxHealth;
+
     private void Start()
     {
         _health = _maxHealth;
-        _playerController.OnPlayerHealthChange(_health, true);
     }
 
     public void GetDamage(int damage)
@@ -24,8 +25,9 @@ public class PlayerHealthController : MonoBehaviour
             if (_health <= 0)
             {
                 _isDead = true;
+                _playerController.OnPlayerDeath();
             }
-            _playerController.OnPlayerHealthChange(_health, false);
+            _playerController.OnPlayerHealthChange(_health);
         }
     }
 }
