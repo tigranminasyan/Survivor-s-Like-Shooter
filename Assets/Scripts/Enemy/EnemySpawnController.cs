@@ -84,8 +84,16 @@ public class EnemySpawnController : MonoBehaviour
         _spawning = false;
     }
     
-    private void OnEnemyKilled()
+    private void OnEnemyKilled(GameObject enemyObject)
     {
+        EnemyController enemy = enemyObject.GetComponent<EnemyController>();
+
+        if (enemy.TryGetDyingState(out DyingState dyingState))
+        {
+            dyingState.EnemyKilledEvent -= OnEnemyKilled;
+        }
+
+        Destroy(enemyObject);
         _killedEnemyCount++;
         KilledEnemyCountChangedEvent?.Invoke(_killedEnemyCount);
     }

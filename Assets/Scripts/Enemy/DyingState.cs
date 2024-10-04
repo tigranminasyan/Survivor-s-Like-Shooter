@@ -6,7 +6,7 @@ public class DyingState : IEnemyState
 {
     private static readonly int DeadHash = Animator.StringToHash("Dead");
 
-    public event Action EnemyKilledEvent;
+    public event Action<GameObject> EnemyKilledEvent;
 
     private Transform _enemyTransform;
     private Animator _animator;
@@ -22,8 +22,7 @@ public class DyingState : IEnemyState
         _animator.SetBool(DeadHash, true);
         DOVirtual.DelayedCall(0.2f, () => 
         {
-            EnemyKilledEvent?.Invoke();
-            UnityEngine.Object.Destroy(_enemyTransform.gameObject);
+            EnemyKilledEvent?.Invoke(_enemyTransform.gameObject);
         });
     }
 
