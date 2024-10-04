@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public class EnemySpawnController : MonoBehaviour
 {
     public event Action<int> KilledEnemyCountChangedEvent;
-    
+
     [SerializeField] private List<EnemyController> _enemyTypes;
     [SerializeField] private float _spawnPeriod = 1.0f;
     [SerializeField] private float _offset = 1.0f; 

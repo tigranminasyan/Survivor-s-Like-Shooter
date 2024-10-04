@@ -17,12 +17,13 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField, Range(1, 10)] private int _damage = 1;
     [SerializeField, Range(1.0f, 10.0f)] private float _moveSpeed = 2.0f;
+    [SerializeField, Range(1, 5)] private int _experienceToGrante = 3;
 
     private IEnemyState _currentState;
     private PlayerController _playerController;
     private Transform _playerTransform;
     private Dictionary<EnemyState, IEnemyState> _states = new Dictionary<EnemyState, IEnemyState>();
-    
+
     private void Awake()
     {
 
@@ -59,6 +60,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnEnemyDie()
     {
+        _playerController.AddExperience(_experienceToGrante);
         SwitchToDyingState();
     }
 

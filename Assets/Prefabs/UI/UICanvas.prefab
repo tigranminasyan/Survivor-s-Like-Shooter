@@ -115,7 +115,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 648caf449e3467c47bcdc26a3275e4bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemySpawnController: {fileID: 0}
   _killedEnemiesText: {fileID: 7642397521237997228}
+  _playerExperienceSlider: {fileID: 7360667892487991593}
 --- !u!1001 &7994638125982023184
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -138,6 +140,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 575232053179217410, guid: f39f132d3d37aa24fa8a3c90eed56e2e, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 636398943045766969, guid: f39f132d3d37aa24fa8a3c90eed56e2e, type: 3}
+      propertyPath: m_Value
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1221521693722553080, guid: f39f132d3d37aa24fa8a3c90eed56e2e, type: 3}
@@ -234,6 +240,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6859811843421315346, guid: f39f132d3d37aa24fa8a3c90eed56e2e, type: 3}
   m_PrefabInstance: {fileID: 7994638125982023184}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7360667892487991593 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 636398943045766969, guid: f39f132d3d37aa24fa8a3c90eed56e2e, type: 3}
+  m_PrefabInstance: {fileID: 7994638125982023184}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7642397521237997228 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 359699771386267836, guid: f39f132d3d37aa24fa8a3c90eed56e2e, type: 3}
