@@ -75,12 +75,14 @@ public class UIController : MonoBehaviour
     public void OnNextLevelBtnClick()
     {
         DisableAllPopups();
+        ResetUI();
         NextLevelBtnClickedEvent?.Invoke();
     }
 
     public void OnReplayBtnClick()
     {
         DisableAllPopups();
+        ResetUI();
         ReplayBtnClickedEvent?.Invoke();
     }
     
@@ -88,6 +90,13 @@ public class UIController : MonoBehaviour
     {
         _winPopup.SetActive(false);
         _losePopup.SetActive(false);
+    }
+
+    private void ResetUI()
+    {
+        _killedEnemiesText.text = "0";
+        _playerExperienceSlider.value = 0;
+        _playerHealthSlider.value = _player.GetMaxHealth;
     }
 
     private void OnDestroy()

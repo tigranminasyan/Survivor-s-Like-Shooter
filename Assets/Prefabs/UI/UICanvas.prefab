@@ -95,7 +95,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2709181553326545804}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
@@ -131,6 +131,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3661943527026014567}
     m_Modifications:
+    - target: {fileID: 2030369828097739386, guid: ec02be26d9176624185c85127799c523, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2558721515865379800}
+    - target: {fileID: 2030369828097739386, guid: ec02be26d9176624185c85127799c523, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnNextLevelBtnClick
+      objectReference: {fileID: 0}
     - target: {fileID: 4057614502165910899, guid: ec02be26d9176624185c85127799c523, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -321,6 +329,14 @@ PrefabInstance:
     - target: {fileID: 1744736701438603442, guid: 67e3b09019d225b4480859fbc658c20f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3709545569081833525, guid: 67e3b09019d225b4480859fbc658c20f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2558721515865379800}
+    - target: {fileID: 3709545569081833525, guid: 67e3b09019d225b4480859fbc658c20f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnReplayBtnClick
       objectReference: {fileID: 0}
     - target: {fileID: 6907768088244376039, guid: 67e3b09019d225b4480859fbc658c20f, type: 3}
       propertyPath: m_Name
