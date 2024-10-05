@@ -7,13 +7,16 @@ using Zenject;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private UIController _uiController;
+    [SerializeField] private LevelManager _levelManager;
 
-    [Inject]
-    private PlayerController _player;
-    public bool IsGameStarted { get; private set; }
+    [Inject] private PlayerController _player;
 
+    public bool IsGameStarted { get; private set; } 
+    public int GetCurrentLevelNumber => _levelManager.GetCurrentLevelNumber;
+    
     private void Awake()
     {
+        _levelManager.LoadCurrentLevel();
         OnGameStart();
     }
     
@@ -38,7 +41,9 @@ public class GameManager : MonoBehaviour
     private void OnLoadNextLevel()
     {
         ResetPlayer();
+        _levelManager.LoadNextLevel();
         OnGameStart();
+        _uiController.UpdateLevelText();
     }
 
     private void OnReplay()

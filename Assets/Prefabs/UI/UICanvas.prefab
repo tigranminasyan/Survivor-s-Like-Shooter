@@ -117,8 +117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 648caf449e3467c47bcdc26a3275e4bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemySpawnController: {fileID: 0}
   _killedEnemiesText: {fileID: 7642397521237997228}
+  _levelText: {fileID: 5702119348828557545}
   _playerExperienceSlider: {fileID: 7360667892487991593}
   _playerHealthSlider: {fileID: 2337719209944527135}
   _winPopup: {fileID: 6402285602156376069}
@@ -494,6 +494,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6859811843421315346, guid: f39f132d3d37aa24fa8a3c90eed56e2e, type: 3}
   m_PrefabInstance: {fileID: 7994638125982023184}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5702119348828557545 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2437386735860920057, guid: f39f132d3d37aa24fa8a3c90eed56e2e, type: 3}
+  m_PrefabInstance: {fileID: 7994638125982023184}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7360667892487991593 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 636398943045766969, guid: f39f132d3d37aa24fa8a3c90eed56e2e, type: 3}
