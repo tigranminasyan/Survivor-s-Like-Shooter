@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 public class EnemyController : MonoBehaviour
 {
@@ -60,7 +59,6 @@ public class EnemyController : MonoBehaviour
         SwitchToDyingState();
     }
 
-    [Inject]
     public void Construct(PlayerController player, EnemyConfiguration enemyConfiguration)
     {
         _playerController = player;
