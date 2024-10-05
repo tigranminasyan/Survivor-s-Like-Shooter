@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _levelManager.LoadCurrentLevel();
+        LevelConfiguration levelConfiguration = _levelManager.GetCurrentLevelConfiguration();
+        _player.Init(levelConfiguration);
+        _uiController.Init(levelConfiguration);
         OnGameStart();
     }
     
@@ -42,12 +45,17 @@ public class GameManager : MonoBehaviour
     {
         ResetPlayer();
         _levelManager.LoadNextLevel();
+        LevelConfiguration levelConfiguration = _levelManager.GetCurrentLevelConfiguration();
+        _player.Init(levelConfiguration);
+        _uiController.Init(levelConfiguration);
         OnGameStart();
         _uiController.UpdateLevelText();
     }
 
     private void OnReplay()
     {
+        LevelConfiguration levelConfiguration = _levelManager.GetCurrentLevelConfiguration();
+        _uiController.Init(levelConfiguration);
         ResetPlayer();
         OnGameStart();
     }

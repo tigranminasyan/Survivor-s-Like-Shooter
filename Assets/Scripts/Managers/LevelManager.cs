@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour
         LoadCurrentLevel();
     }
     
-    public LevelConfiguration GetCurrentLevel()
+    public LevelConfiguration GetCurrentLevelConfiguration()
     {
         return _currentLevel;
     }

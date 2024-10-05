@@ -401,7 +401,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerHealthController: {fileID: 4560013004572354231}
+  _playerMovementController: {fileID: 4507213047161687609}
+  _enemyDetector: {fileID: 4164727106007282919}
   _playerExperience: 0
+  _playerMaxExperience: 0
+  _initialPosition: {x: 0, y: 0, z: 0}
+  _killedEnemyCount: 0
 --- !u!114 &6493461730130193939
 MonoBehaviour:
   m_ObjectHideFlags: 0

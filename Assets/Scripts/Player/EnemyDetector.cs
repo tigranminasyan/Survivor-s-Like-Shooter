@@ -5,9 +5,14 @@ using UnityEngine;
 
 public class EnemyDetector : MonoBehaviour
 {
-    [SerializeField, Range(0.0f, 5)] private float _detectRadius = 5.0f;
+    [SerializeField, ReadonlyField] private float _detectRadius;
     [SerializeField] private LayerMask _enemyLayer;
     
+    public void Init(float detectRadius)
+    {
+        _detectRadius = detectRadius;
+    }
+
     public List<Transform> GetNearestReachableEnemy()
     {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, _detectRadius, _enemyLayer);

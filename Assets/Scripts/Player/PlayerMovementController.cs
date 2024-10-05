@@ -11,16 +11,17 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField, ReadonlyField] private float _inputVertical;
     [SerializeField, ReadonlyField] private bool _isPlayerControlling = false;
     [SerializeField, ReadonlyField] private float _currentMovementSpeed;
-
-    [SerializeField] private float _movementSpeed = 6f;
+    [SerializeField, ReadonlyField] private float _movementSpeed;
+    
     [SerializeField] private float _movementStopingSpeed = 0.35f;
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     
     [Inject] private GameManager _gameManager;
-    
-    private void Start()
+
+    public void Init(float movementSpeed)
     {
+        _movementSpeed = movementSpeed;
         _currentMovementSpeed = _movementSpeed;
     }
     

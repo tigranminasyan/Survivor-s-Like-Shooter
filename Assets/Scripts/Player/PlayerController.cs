@@ -12,20 +12,26 @@ public class PlayerController : MonoBehaviour
     public event Action<int> KilledEnemyCountChangedEvent;
 
     [SerializeField] private PlayerHealthController _playerHealthController;
+    [SerializeField] private PlayerMovementController _playerMovementController;
+    [SerializeField] private EnemyDetector _enemyDetector;
     [SerializeField, ReadonlyField] private int _playerExperience;
     [SerializeField, ReadonlyField] private int _playerMaxExperience;
     [SerializeField, ReadonlyField] private Vector3 _initialPosition;
     [SerializeField, ReadonlyField] private int _killedEnemyCount = 0;
 
-    public int PlayerMaxExperience => _playerMaxExperience;
-    public int GetMaxHealth => _playerHealthController.GetMaxHealth;
-    
     private void Awake()
     {
-        _playerMaxExperience = 100;
         _initialPosition = transform.position;
     }
 
+    public void Init(LevelConfiguration levelConfiguration)
+    {
+        _playerMaxExperience = levelConfiguration.levelMaxExperience;
+        _playerHealthController.Init(levelConfiguration.playerMaxHealth);
+        _playerMovementController.Init(levelConfiguration.playerSpeed);
+        _enemyDetector.Init(levelConfiguration.enemyDetectRadius);
+    }
+    
     public void GetDamage(int damage)
     {
         _playerHealthController.GetDamage(damage);

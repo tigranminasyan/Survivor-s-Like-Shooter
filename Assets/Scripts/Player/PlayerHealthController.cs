@@ -6,17 +6,16 @@ using UnityEngine;
 public class PlayerHealthController : MonoBehaviour
 {
     [SerializeField] PlayerController _playerController;
-    [SerializeField, Range(1, 25)] private int _maxHealth = 10;
-    [SerializeField, ReadonlyField] private int _health = 1;
+    [SerializeField, ReadonlyField] private int _maxHealth;
+    [SerializeField, ReadonlyField] private int _health;
     [SerializeField, ReadonlyField] private bool _isDead = false;
 
-    public int GetMaxHealth => _maxHealth;
-
-    private void Start()
+    public void Init(int maxHealth)
     {
+        _maxHealth = maxHealth;
         _health = _maxHealth;
     }
-
+    
     public void GetDamage(int damage)
     {
         if (!_isDead)

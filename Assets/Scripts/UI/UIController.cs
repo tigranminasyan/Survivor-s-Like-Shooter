@@ -25,10 +25,7 @@ public class UIController : MonoBehaviour
     {
         _killedEnemiesText.text = "0";
         _levelText.text = "Lv. " + _gameManager.GetCurrentLevelNumber;
-        _playerExperienceSlider.maxValue = _player.PlayerMaxExperience;
-        _playerHealthSlider.maxValue = _player.GetMaxHealth;
-        _playerHealthSlider.value = _player.GetMaxHealth;
-        
+
         _player.KilledEnemyCountChangedEvent += UpdateKilledEnemiesText;
         _player.PlayerExperienceChangeEvent += UpdatePlayerExperienceText;
         _player.PlayerHealthChangeEvent += UpdatePlayerHealthText;
@@ -37,6 +34,16 @@ public class UIController : MonoBehaviour
 
         _winPopup.SetActive(false);
         _losePopup.SetActive(false);
+    }
+    
+    public void Init(LevelConfiguration levelConfiguration)
+    {
+        _playerExperienceSlider.maxValue = levelConfiguration.levelMaxExperience;
+        _playerExperienceSlider.value = 0;
+
+        _playerHealthSlider.maxValue = levelConfiguration.playerMaxHealth;
+        _playerHealthSlider.value = levelConfiguration.playerMaxHealth;
+        _killedEnemiesText.text = "0";
     }
     
     private void UpdateKilledEnemiesText(int killedEnemies)
@@ -77,14 +84,12 @@ public class UIController : MonoBehaviour
     public void OnNextLevelBtnClick()
     {
         DisableAllPopups();
-        ResetUI();
         NextLevelBtnClickedEvent?.Invoke();
     }
 
     public void OnReplayBtnClick()
     {
         DisableAllPopups();
-        ResetUI();
         ReplayBtnClickedEvent?.Invoke();
     }
     
@@ -97,13 +102,6 @@ public class UIController : MonoBehaviour
     public void UpdateLevelText()
     {
         _levelText.text = "Lv. " + _gameManager.GetCurrentLevelNumber;
-    }
-
-    private void ResetUI()
-    {
-        _killedEnemiesText.text = "0";
-        _playerExperienceSlider.value = 0;
-        _playerHealthSlider.value = _player.GetMaxHealth;
     }
 
     private void OnDestroy()
