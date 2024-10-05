@@ -75,7 +75,7 @@ public class UIController : MonoBehaviour
         ShowLosePopup();
         DOVirtual.DelayedCall(1.5f, () =>
         {
-            ContinueGame(true);
+            ContinueGame(false);
         });
     }
 
