@@ -82,25 +82,34 @@ public class EnemySpawnController : MonoBehaviour
         Vector3 screenBottomLeft = _playerCamera.ViewportToWorldPoint(Vector2.zero);
         Vector3 screenTopRight = _playerCamera.ViewportToWorldPoint(Vector2.one);
 
-        int side = Random.Range(0, 4);
-        Vector3 randomPosition = Vector2.zero;
+        float randomX, randomY;
 
-        switch (side)
+        switch (Random.Range(0, 4))
         {
-            case 0:
-                randomPosition = new Vector2(screenBottomLeft.x - _offset, Random.Range(screenBottomLeft.y, screenTopRight.y));
+            case 0: // Left
+                randomX = screenBottomLeft.x - _offset;
+                randomY = Random.Range(screenBottomLeft.y, screenTopRight.y);
                 break;
-            case 1:
-                randomPosition = new Vector2(screenTopRight.x + _offset, Random.Range(screenBottomLeft.y, screenTopRight.y));
+            case 1: // Right
+                randomX = screenTopRight.x + _offset;
+                randomY = Random.Range(screenBottomLeft.y, screenTopRight.y);
                 break;
-            case 2:
-                randomPosition = new Vector2(Random.Range(screenBottomLeft.x, screenTopRight.x), screenBottomLeft.y - _offset);
+            case 2: // Bottom
+                randomX = Random.Range(screenBottomLeft.x, screenTopRight.x);
+                randomY = screenBottomLeft.y - _offset;
                 break;
-            case 3:
-                randomPosition = new Vector2(Random.Range(screenBottomLeft.x, screenTopRight.x), screenTopRight.y + _offset);
+            case 3: // Top
+                randomX = Random.Range(screenBottomLeft.x, screenTopRight.x);
+                randomY = screenTopRight.y + _offset;
+                break;
+            default:
+                randomX = 0;
+                randomY = 0;
                 break;
         }
 
+        Vector3 randomPosition = new Vector3(randomX, randomY, 0);
+        
         return randomPosition;
     }
     
