@@ -21,9 +21,11 @@ public class PlayerGunController : MonoBehaviour
     [Inject]
     private GameManager _gameManager;
     
-    private float _detltaTime;
+    private float _shootingTimer;
+
     private void Awake()
     {
+        _shootingTimer = _shootingInterval;
         _initalSortingOrder = _gunSpriteRenderer.sortingOrder;
     }
 
@@ -31,23 +33,9 @@ public class PlayerGunController : MonoBehaviour
     {
         if (_gameManager.IsGameStarted)
         {
-            List<Transform> nearestReachableEnemy = _enemyDetector.GetNearestReachableEnemy();
-            if (nearestReachableEnemy.Count > 0)
+            _shootingTimer += Time.deltaTime;
+            if (_shootingTimer >= _shootingInterval)
             {
-                Transform target = nearestReachableEnemy[0];
-                Vector3 direction = (target.position - _gun.position).normalized;
-                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                _directionX = direction.x;
-            
-                if (Mathf.Abs(_directionX) > 0.2f)
-                {
-                    bool isLeft = _directionX < 0;
-                    _gunSpriteRenderer.sortingOrder = isLeft ? _initalSortingOrder + 1 : _initalSortingOrder;
-                    _gunSpriteRenderer.flipY = isLeft;
-                    _gun.position = isLeft ? _rightHand.position : _leftHand.position;
-                }
-            
-                _gun.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
                 HandleShooting();
             }
         }
@@ -55,19 +43,30 @@ public class PlayerGunController : MonoBehaviour
 
     private void HandleShooting()
     {
-        if (_detltaTime >= _shootingInterval)
+        List<Transform> nearestReachableEnemy = _enemyDetector.GetNearestReachableEnemy();
+        if (nearestReachableEnemy.Count > 0)
         {
+            Transform target = nearestReachableEnemy[0];
+            Vector3 direction = (target.position - _gun.position).normalized;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            _directionX = direction.x;
+            
+            if (Mathf.Abs(_directionX) > 0.2f)
+            {
+                bool isLeft = _directionX < 0;
+                _gunSpriteRenderer.sortingOrder = isLeft ? _initalSortingOrder + 1 : _initalSortingOrder;
+                _gunSpriteRenderer.flipY = isLeft;
+                _gun.position = isLeft ? _rightHand.position : _leftHand.position;
+            }
+            
+            _gun.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             Shoot();
-            _detltaTime = 0;
-        }
-        else
-        {
-            _detltaTime += Time.deltaTime;
         }
     }
 
     private void Shoot()
     {
+        _shootingTimer = 0f;
         Instantiate(_bulletController, _firePoint.position, _gun.rotation);
     }
 }
