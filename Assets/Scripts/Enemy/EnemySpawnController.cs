@@ -16,13 +16,13 @@ public class EnemySpawnController : MonoBehaviour
     [SerializeField] private bool _spawning;
 
     [SerializeField, ReadonlyField] private int _killedEnemyCount = 0;
-    private Camera _playerCamera;
 
-    [Inject]
-    private PlayerController _player;
-    [Inject]
-    private GameManager _gameManager;
+    [Inject] private PlayerController _player;
+    [Inject] private GameManager _gameManager;
     
+    private Camera _playerCamera;
+    private float _spawnTimer;
+
     private void Start()
     {
         _playerCamera = Camera.main;
@@ -31,27 +31,34 @@ public class EnemySpawnController : MonoBehaviour
             Debug.LogError("Main camera not found");
             _spawning = false;
         }
-        StartCoroutine(SpawnEnemy());
+        _spawnTimer = _spawnPeriod;
     }
-    
-    private IEnumerator SpawnEnemy()
+
+    public void Update()
     {
-        while (_spawning && _gameManager.IsGameStarted)
+        _spawnTimer += Time.deltaTime;
+        if (_spawning &&
+            _spawnTimer >= _spawnPeriod &&
+            _gameManager.IsGameStarted)
         {
-            Vector3 spawnPosition = GetRandomPositionOutOfCameraView();
-            EnemyController randomEnemy = _enemyTypes[Random.Range(0, _enemyTypes.Count)];
-            EnemyController enemy = Instantiate(randomEnemy,
-                spawnPosition,
-                Quaternion.identity,
-                _enemyContainer.transform);
-            enemy.Construct(_player);
+            SpawnEnemy();
+            _spawnTimer = 0f;
+        }
+    }
+
+    private void SpawnEnemy()
+    {
+        Vector3 spawnPosition = GetRandomPositionOutOfCameraView();
+        EnemyController randomEnemy = _enemyTypes[Random.Range(0, _enemyTypes.Count)];
+        EnemyController enemy = Instantiate(randomEnemy,
+            spawnPosition,
+            Quaternion.identity,
+            _enemyContainer.transform);
+        enemy.Construct(_player);
             
-            if (enemy.TryGetDyingState(out DyingState dyingState))
-            {
-                dyingState.EnemyKilledEvent += OnEnemyKilled;
-            }
-            
-            yield return new WaitForSeconds(_spawnPeriod);
+        if (enemy.TryGetDyingState(out DyingState dyingState))
+        {
+            dyingState.EnemyKilledEvent += OnEnemyKilled;
         }
     }
     
