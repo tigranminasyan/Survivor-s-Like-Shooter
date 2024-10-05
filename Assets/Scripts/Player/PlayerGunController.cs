@@ -18,8 +18,7 @@ public class PlayerGunController : MonoBehaviour
     [SerializeField, ReadonlyField] private float _directionX;
     [SerializeField, ReadonlyField] private int _initalSortingOrder;
 
-    [Inject]
-    private GameManager _gameManager;
+    [Inject] private GameManager _gameManager;
     
     private float _shootingTimer;
 

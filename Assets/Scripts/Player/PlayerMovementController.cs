@@ -17,8 +17,7 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     
-    [Inject]
-    private GameManager _gameManager;
+    [Inject] private GameManager _gameManager;
     
     private void Start()
     {
