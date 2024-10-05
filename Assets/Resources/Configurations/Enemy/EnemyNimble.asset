@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d3c265a664be02478cce65dbeb930b2, type: 3}
   m_Name: EnemyNimble
   m_EditorClassIdentifier: 
-  health: 8
+  health: 3
   damage: 3
-  speed: 3
+  speed: 2.5
   grantingExperience: 2
   prefab: {fileID: 1556342136530811433, guid: 736880dadd8c35445b064290cc651de2, type: 3}

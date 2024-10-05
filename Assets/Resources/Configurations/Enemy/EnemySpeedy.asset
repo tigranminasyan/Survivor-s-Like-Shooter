@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d3c265a664be02478cce65dbeb930b2, type: 3}
   m_Name: EnemySpeedy
   m_EditorClassIdentifier: 
-  health: 5
+  health: 4
   damage: 3
-  speed: 4
+  speed: 3
   grantingExperience: 3
   prefab: {fileID: 1110769587546094243, guid: ef37af66787c0d34da3656328069b985, type: 3}

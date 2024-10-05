@@ -20,4 +20,4 @@ MonoBehaviour:
   enemyConfigurationContainerer:
   - {fileID: 11400000, guid: 22b973816c41ccc48bd6ac7f64ed01c0, type: 2}
   - {fileID: 11400000, guid: a7804250f3042f5429cb533622db06d3, type: 2}
-  enemySpawnPeriod: 4
+  enemySpawnPeriod: 2
