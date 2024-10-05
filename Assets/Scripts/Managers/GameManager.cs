@@ -27,8 +27,7 @@ public class GameManager : MonoBehaviour
     {
         _player.LevelCompletedEvent += OnLevelComplete;
         _player.LevelFailedEvent += OnLevelFailed;
-        _uiController.NextLevelBtnClickedEvent += OnLoadNextLevel;
-        _uiController.ReplayBtnClickedEvent += OnReplay;
+        _uiController.ContinueGameEvent += OnGameContinue;
     }
     
     private void OnLevelComplete()
@@ -41,6 +40,18 @@ public class GameManager : MonoBehaviour
         IsGameStarted = false;
     }
     
+    private void OnGameContinue(bool isWin)
+    {
+        if (isWin)
+        {
+            OnLoadNextLevel();
+        }
+        else
+        {
+            OnReplay();
+        }
+    }
+
     private void OnLoadNextLevel()
     {
         ResetPlayer();
@@ -69,8 +80,7 @@ public class GameManager : MonoBehaviour
     {
         _player.LevelCompletedEvent -= OnLevelComplete;
         _player.LevelFailedEvent -= OnLevelFailed;
-        _uiController.NextLevelBtnClickedEvent -= OnLoadNextLevel;
-        _uiController.ReplayBtnClickedEvent -= OnReplay;
+        _uiController.ContinueGameEvent += OnGameContinue;
     }
     
     private void ResetPlayer()

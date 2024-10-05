@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,8 +9,7 @@ using Zenject;
 
 public class UIController : MonoBehaviour
 {
-    public event Action ReplayBtnClickedEvent;
-    public event Action NextLevelBtnClickedEvent;
+    public event Action<bool> ContinueGameEvent;
     
     [SerializeField] private Text _killedEnemiesText;
     [SerializeField] private Text _levelText;
@@ -64,11 +64,19 @@ public class UIController : MonoBehaviour
     private void OnLevelComplete()
     {
         ShowWinPopup();
+        DOVirtual.DelayedCall(1.5f, () =>
+        {
+            ContinueGame(true);
+        });
     }
 
     private void OnLevelFailed()
     {
         ShowLosePopup();
+        DOVirtual.DelayedCall(1.5f, () =>
+        {
+            ContinueGame(true);
+        });
     }
 
     private void ShowWinPopup()
@@ -81,18 +89,12 @@ public class UIController : MonoBehaviour
         _losePopup.SetActive(true);
     }
 
-    public void OnNextLevelBtnClick()
+    private void ContinueGame(bool isWin)
     {
         DisableAllPopups();
-        NextLevelBtnClickedEvent?.Invoke();
+        ContinueGameEvent?.Invoke(isWin);
     }
 
-    public void OnReplayBtnClick()
-    {
-        DisableAllPopups();
-        ReplayBtnClickedEvent?.Invoke();
-    }
-    
     private void DisableAllPopups()
     {
         _winPopup.SetActive(false);
