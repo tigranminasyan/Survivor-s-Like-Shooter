@@ -7,15 +7,11 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawnController : MonoBehaviour
 {
-    public event Action<int> KilledEnemyCountChangedEvent;
-
     [SerializeField] private List<EnemyController> _enemyTypes;
     [SerializeField] private float _spawnPeriod = 1.0f;
     [SerializeField] private float _offset = 1.0f; 
     [SerializeField] private Transform _enemyContainer;
     [SerializeField] private bool _spawning;
-
-    [SerializeField, ReadonlyField] private int _killedEnemyCount = 0;
 
     [Inject] private PlayerController _player;
     [Inject] private GameManager _gameManager;
@@ -104,7 +100,6 @@ public class EnemySpawnController : MonoBehaviour
         }
 
         Destroy(enemyObject);
-        _killedEnemyCount++;
-        KilledEnemyCountChangedEvent?.Invoke(_killedEnemyCount);
+        _player.OnEnemyKilled();
     }
 }

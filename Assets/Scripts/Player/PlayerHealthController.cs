@@ -30,4 +30,10 @@ public class PlayerHealthController : MonoBehaviour
             _playerController.OnPlayerHealthChange(_health);
         }
     }
+
+    public void ResetHealth()
+    {
+        _health = _maxHealth;
+        _isDead = false;
+    }
 }

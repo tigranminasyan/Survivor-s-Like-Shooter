@@ -37,11 +37,13 @@ public class GameManager : MonoBehaviour
     
     private void OnLoadNextLevel()
     {
+        ResetPlayer();
         OnGameStart();
     }
 
     private void OnReplay()
     {
+        ResetPlayer();
         OnGameStart();
     }
     
@@ -56,5 +58,10 @@ public class GameManager : MonoBehaviour
         _player.LevelFailedEvent -= OnLevelFailed;
         _uiController.NextLevelBtnClickedEvent -= OnLoadNextLevel;
         _uiController.ReplayBtnClickedEvent -= OnReplay;
+    }
+    
+    private void ResetPlayer()
+    {
+        _player.ResetPlayer();
     }
 }
