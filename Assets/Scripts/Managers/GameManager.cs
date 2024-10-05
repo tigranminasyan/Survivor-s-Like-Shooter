@@ -6,6 +6,8 @@ using Zenject;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private UIController _uiController;
+
     [Inject]
     private PlayerController _player;
     public bool IsGameStarted { get; private set; }
@@ -19,6 +21,8 @@ public class GameManager : MonoBehaviour
     {
         _player.LevelCompletedEvent += OnLevelComplete;
         _player.LevelFailedEvent += OnLevelFailed;
+        _uiController.NextLevelBtnClickedEvent += OnLoadNextLevel;
+        _uiController.ReplayBtnClickedEvent += OnReplay;
     }
     
     private void OnLevelComplete()
@@ -31,6 +35,16 @@ public class GameManager : MonoBehaviour
         IsGameStarted = false;
     }
     
+    private void OnLoadNextLevel()
+    {
+        OnGameStart();
+    }
+
+    private void OnReplay()
+    {
+        OnGameStart();
+    }
+    
     private void OnGameStart()
     {
         IsGameStarted = true;
@@ -40,5 +54,7 @@ public class GameManager : MonoBehaviour
     {
         _player.LevelCompletedEvent -= OnLevelComplete;
         _player.LevelFailedEvent -= OnLevelFailed;
+        _uiController.NextLevelBtnClickedEvent -= OnLoadNextLevel;
+        _uiController.ReplayBtnClickedEvent -= OnReplay;
     }
 }
