@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour
 {
+    public event Action LevelLoadedEvent;
+
     [SerializeField] LevelConfiguration[] _levels;
     
     [SerializeField, ReadonlyField] private int _currentLevelIndex = 0;
@@ -23,7 +27,7 @@ public class LevelManager : MonoBehaviour
     {
         return _currentLevel;
     }
-    
+
     public void LoadCurrentLevel()
     {
         LoadLevel(_currentLevelIndex);
@@ -40,6 +44,7 @@ public class LevelManager : MonoBehaviour
     private void LoadLevel(int index)
     {
         _currentLevel = _levels[index];
+        LevelLoadedEvent?.Invoke();
     }
     
     private int GetLeveIndexToLoad()

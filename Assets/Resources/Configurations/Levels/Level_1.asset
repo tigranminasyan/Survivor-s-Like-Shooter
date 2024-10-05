@@ -17,3 +17,9 @@ MonoBehaviour:
   playerMaxHealth: 15
   playerSpeed: 3.2
   enemyDetectRadius: 2.5
+  enemies:
+  - {fileID: 11400000, guid: 7f3a83115ac89a14680e37bdd7a5dda8, type: 2}
+  - {fileID: 11400000, guid: 22b973816c41ccc48bd6ac7f64ed01c0, type: 2}
+  - {fileID: 11400000, guid: a7804250f3042f5429cb533622db06d3, type: 2}
+  - {fileID: 11400000, guid: c7f09e83caea4284c82c4d7df55fecc6, type: 2}
+  enemySpawnPeriod: 3

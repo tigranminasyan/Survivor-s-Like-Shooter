@@ -7,8 +7,14 @@ public class EnemyHealthController : MonoBehaviour
 {
     public event Action OnEnemyDie;
     
-    [SerializeField, Range(1, 5)] private int _health = 2;
     [SerializeField] private Collider2D _collider;
+    
+    [SerializeField, ReadonlyField] private int _health;
+
+    public void Init(int health)
+    {
+        _health = health;
+    }
     
     public void GetDamage(int damage)
     {

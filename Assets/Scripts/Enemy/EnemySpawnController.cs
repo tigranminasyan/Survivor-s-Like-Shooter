@@ -7,15 +7,26 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawnController : MonoBehaviour
 {
-    [SerializeField] private List<EnemyController> _enemyTypes;
-    [SerializeField] private float _spawnPeriod = 1.0f;
+    private struct EnemyProperties
+    {
+        public int health;
+        public int damage;
+        public float speed;
+        public int grantingExperience;
+    }
+    
+    [SerializeField] private LevelManager _levelManager;
     [SerializeField] private float _offset = 1.0f; 
     [SerializeField] private Transform _enemyContainer;
     [SerializeField] private bool _spawning;
 
+    [SerializeField, ReadonlyField] private List<EnemyController> _enemyTypes;
+    [SerializeField, ReadonlyField] private float _spawnPeriod;
+
     [Inject] private PlayerController _player;
     [Inject] private GameManager _gameManager;
-    
+
+    private Dictionary<EnemyController, EnemyProperties> _enemyTypesToConfiguration;
     private Camera _playerCamera;
     private float _spawnTimer;
 
@@ -27,7 +38,37 @@ public class EnemySpawnController : MonoBehaviour
             Debug.LogError("Main camera not found");
             _spawning = false;
         }
+        
+        _levelManager.LevelLoadedEvent += OnLevelLoaded;
+        Init();
+    }
+
+    private void Init()
+    {
+        LevelConfiguration levelConfiguration = _levelManager.GetCurrentLevelConfiguration();
+        _spawnPeriod = levelConfiguration.enemySpawnPeriod;
         _spawnTimer = _spawnPeriod;
+        InitialiseEnemyTypes(levelConfiguration.enemies);
+    }
+    
+    private void InitialiseEnemyTypes(List<EnemyConfiguration> enemies)
+    {
+        _enemyTypes = new List<EnemyController>();
+        _enemyTypesToConfiguration = new Dictionary<EnemyController, EnemyProperties>();
+        foreach (EnemyConfiguration enemy in enemies)
+        {
+            EnemyController enemyController = enemy.prefab;
+            _enemyTypes.Add(enemyController);
+            
+            EnemyProperties enemyProperties = new EnemyProperties
+            {
+                health = enemy.health,
+                damage = enemy.damage,
+                speed = enemy.speed,
+                grantingExperience = enemy.grantingExperience
+            };
+            _enemyTypesToConfiguration[enemy.prefab] = enemyProperties;
+        }
     }
 
     public void Update()
@@ -40,6 +81,11 @@ public class EnemySpawnController : MonoBehaviour
             SpawnEnemy();
             _spawnTimer = 0f;
         }
+    }
+
+    private void OnLevelLoaded()
+    {
+        Init();
     }
 
     private void SpawnEnemy()
@@ -56,6 +102,12 @@ public class EnemySpawnController : MonoBehaviour
         {
             dyingState.EnemyKilledEvent += OnEnemyKilled;
         }
+        
+        EnemyProperties enemyProperties = _enemyTypesToConfiguration[randomEnemy];
+        enemy.Init(enemyProperties.health,
+            enemyProperties.damage,
+            enemyProperties.speed,
+            enemyProperties.grantingExperience);
     }
     
     private Vector3 GetRandomPositionOutOfCameraView()
@@ -101,5 +153,10 @@ public class EnemySpawnController : MonoBehaviour
 
         Destroy(enemyObject);
         _player.OnEnemyKilled();
+    }
+    
+    private void OnDestroy()
+    {
+        _levelManager.LevelLoadedEvent -= OnLevelLoaded;
     }
 }

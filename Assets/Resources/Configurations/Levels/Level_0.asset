@@ -16,4 +16,8 @@ MonoBehaviour:
   levelMaxExperience: 50
   playerMaxHealth: 10
   playerSpeed: 3
-  enemyDetectRadius: 2
+  enemyDetectRadius: 5
+  enemies:
+  - {fileID: 11400000, guid: 7f3a83115ac89a14680e37bdd7a5dda8, type: 2}
+  - {fileID: 11400000, guid: 22b973816c41ccc48bd6ac7f64ed01c0, type: 2}
+  enemySpawnPeriod: 4

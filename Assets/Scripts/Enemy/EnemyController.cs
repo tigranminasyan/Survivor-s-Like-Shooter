@@ -15,23 +15,27 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private EnemyHealthController _enemyHealthController;
     [SerializeField] private Animator _animator;
-    [SerializeField, Range(1, 10)] private int _damage = 1;
-    [SerializeField, Range(1.0f, 10.0f)] private float _moveSpeed = 2.0f;
-    [SerializeField, Range(1, 5)] private int _experienceToGrante = 3;
+    
+    [SerializeField, ReadonlyField] private int _damage;
+    [SerializeField, ReadonlyField] private float _moveSpeed;
+    [SerializeField, ReadonlyField] private int _experienceToGrante;
 
     private IEnemyState _currentState;
     private PlayerController _playerController;
     private Transform _playerTransform;
     private Dictionary<EnemyState, IEnemyState> _states = new Dictionary<EnemyState, IEnemyState>();
-
-    private void Awake()
-    {
-
-    }
     
     private void Start()
     {
         _enemyHealthController.OnEnemyDie += OnEnemyDie;
+    }
+    
+    public void Init(int health, int damage, float speed, int grantingExperience)
+    {
+        _enemyHealthController.Init(health);
+        _damage = damage;
+        _moveSpeed = speed;
+        _experienceToGrante = grantingExperience;
     }
 
     private void Update()
