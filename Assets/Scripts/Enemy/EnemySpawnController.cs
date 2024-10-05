@@ -7,26 +7,17 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawnController : MonoBehaviour
 {
-    private struct EnemyProperties
-    {
-        public int health;
-        public int damage;
-        public float speed;
-        public int grantingExperience;
-    }
-    
     [SerializeField] private LevelManager _levelManager;
     [SerializeField] private float _offset = 1.0f; 
     [SerializeField] private Transform _enemyContainer;
     [SerializeField] private bool _spawning;
 
-    [SerializeField, ReadonlyField] private List<EnemyController> _enemyTypes;
+    [SerializeField, ReadonlyField] private List<EnemyConfiguration> _enemyConfigurationContainerer;
     [SerializeField, ReadonlyField] private float _spawnPeriod;
 
     [Inject] private PlayerController _player;
     [Inject] private GameManager _gameManager;
 
-    private Dictionary<EnemyController, EnemyProperties> _enemyTypesToConfiguration;
     private Camera _playerCamera;
     private float _spawnTimer;
 
@@ -48,32 +39,13 @@ public class EnemySpawnController : MonoBehaviour
         LevelConfiguration levelConfiguration = _levelManager.GetCurrentLevelConfiguration();
         _spawnPeriod = levelConfiguration.enemySpawnPeriod;
         _spawnTimer = _spawnPeriod;
-        InitialiseEnemyTypes(levelConfiguration.enemies);
-    }
-    
-    private void InitialiseEnemyTypes(List<EnemyConfiguration> enemies)
-    {
-        _enemyTypes = new List<EnemyController>();
-        _enemyTypesToConfiguration = new Dictionary<EnemyController, EnemyProperties>();
-        foreach (EnemyConfiguration enemy in enemies)
-        {
-            EnemyController enemyController = enemy.prefab;
-            _enemyTypes.Add(enemyController);
-            
-            EnemyProperties enemyProperties = new EnemyProperties
-            {
-                health = enemy.health,
-                damage = enemy.damage,
-                speed = enemy.speed,
-                grantingExperience = enemy.grantingExperience
-            };
-            _enemyTypesToConfiguration[enemy.prefab] = enemyProperties;
-        }
+        _enemyConfigurationContainerer = levelConfiguration.enemyConfigurationContainerer;
     }
 
     public void Update()
     {
         _spawnTimer += Time.deltaTime;
+
         if (_spawning &&
             _spawnTimer >= _spawnPeriod &&
             _gameManager.IsGameStarted)
@@ -91,23 +63,18 @@ public class EnemySpawnController : MonoBehaviour
     private void SpawnEnemy()
     {
         Vector3 spawnPosition = GetRandomPositionOutOfCameraView();
-        EnemyController randomEnemy = _enemyTypes[Random.Range(0, _enemyTypes.Count)];
+        EnemyConfiguration randomEnemyConfiguration = _enemyConfigurationContainerer[Random.Range(0, _enemyConfigurationContainerer.Count)];
+        EnemyController randomEnemy = randomEnemyConfiguration.prefab;
         EnemyController enemy = Instantiate(randomEnemy,
             spawnPosition,
             Quaternion.identity,
             _enemyContainer.transform);
-        enemy.Construct(_player);
-            
+        enemy.Construct(_player, randomEnemyConfiguration);
+
         if (enemy.TryGetDyingState(out DyingState dyingState))
         {
             dyingState.EnemyKilledEvent += OnEnemyKilled;
         }
-        
-        EnemyProperties enemyProperties = _enemyTypesToConfiguration[randomEnemy];
-        enemy.Init(enemyProperties.health,
-            enemyProperties.damage,
-            enemyProperties.speed,
-            enemyProperties.grantingExperience);
     }
     
     private Vector3 GetRandomPositionOutOfCameraView()

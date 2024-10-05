@@ -18,6 +18,6 @@ public class LevelConfiguration : ScriptableObject
     
     [Header("Enemies Spawning Settings")]
 
-    public List<EnemyConfiguration> enemies;
+    public List<EnemyConfiguration> enemyConfigurationContainerer;
     public float enemySpawnPeriod;
 }

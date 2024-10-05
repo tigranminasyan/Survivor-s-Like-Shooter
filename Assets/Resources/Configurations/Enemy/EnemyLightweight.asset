@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   damage: 1
-  speed: 6
+  speed: 2.5
   grantingExperience: 1
   prefab: {fileID: 2750367051871537024, guid: c57699879ec842546a256d2127c1be6b, type: 3}

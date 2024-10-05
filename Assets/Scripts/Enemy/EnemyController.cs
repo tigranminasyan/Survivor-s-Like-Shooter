@@ -29,14 +29,6 @@ public class EnemyController : MonoBehaviour
     {
         _enemyHealthController.OnEnemyDie += OnEnemyDie;
     }
-    
-    public void Init(int health, int damage, float speed, int grantingExperience)
-    {
-        _enemyHealthController.Init(health);
-        _damage = damage;
-        _moveSpeed = speed;
-        _experienceToGrante = grantingExperience;
-    }
 
     private void Update()
     {
@@ -69,10 +61,11 @@ public class EnemyController : MonoBehaviour
     }
 
     [Inject]
-    public void Construct(PlayerController player)
+    public void Construct(PlayerController player, EnemyConfiguration enemyConfiguration)
     {
         _playerController = player;
         _playerTransform = player.transform;
+        Init(enemyConfiguration);
         InitializeStates();
         if (_states[EnemyState.Chasing] is ChasingState chasingState)
         {
@@ -80,7 +73,15 @@ public class EnemyController : MonoBehaviour
         }
         SwitchToChasingState(); 
     }
-    
+
+    private void Init(EnemyConfiguration enemyConfiguration)
+    {
+        _enemyHealthController.Init(enemyConfiguration.health);
+        _damage = enemyConfiguration.damage;
+        _moveSpeed = enemyConfiguration.speed;
+        _experienceToGrante = enemyConfiguration.grantingExperience;
+    }
+
     private void InitializeStates()
     {
         _states[EnemyState.Chasing] = new ChasingState(transform, _moveSpeed);
